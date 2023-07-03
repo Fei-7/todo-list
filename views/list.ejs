@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<div class="list-container">
+    <p class="h1">Welcome <%=username%>!</p>
+    <h2>To-Do List</h2>
+    <form id="todo-form" action="add" method="post">
+        <div class="input-group mb-3">
+            <input name="task" type="text" class="form-control" id="todo-input" placeholder="Enter a task" required>
+            <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+        </div>
+    </form>
+    <ul class="list-group" id="todo-list">
+        <% items.forEach((item) => { %>
+            <li class="list-group-item">
+                <form action="/delete" method="post" id=<%=item._id%>>
+                    <%=item.name%>
+                    <span class="delete-btn" onclick=<%="document.getElementById('" + item._id + "').submit()"%> >&times;</span>
+                    <input type="hidden" name="itemId" value=<%=item._id%>>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+<%- include('partials/footer') %>
